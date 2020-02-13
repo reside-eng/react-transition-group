@@ -40,3 +40,5 @@ jspm_packages
 
 # Visual Studio Code configuration
 .vscode
+
+package-lock.json
