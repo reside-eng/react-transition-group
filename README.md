@@ -1,4 +1,12 @@
-# react-transition-group [![npm][npm-badge]][npm]
+# react-transition-group
+
+## Warning
+
+This repository follows the new [NPM Library CI/CD Workflow](https://residenetwork.atlassian.net/wiki/spaces/ENG/pages/1173291063/NPM+Library+CI+CD+Workflow). View those doc for more information on enforced Git commits and the release automation process.
+
+This repository is a fork of an open source library which has now been deviated.
+
+---
 
 > **ATTENTION!** To address many issues that have come up over the years, the API in v2 is not backwards compatible with the original [`React addon (v1-stable)`](https://github.com/reactjs/react-transition-group/tree/v1-stable).
 >
@@ -21,7 +29,7 @@ Clone the repo first:
 git@github.com:reactjs/react-transition-group.git
 ```
 
-Then run `npm install` (or `yarn`), and finally `npm run storybook` to start a storybook instance that you can navigate to in your browser to see the examples.
+Then run `yarn install`, and finally `yarn storybook` to start a storybook instance that you can navigate to in your browser to see the examples.
 
 [npm-badge]: https://img.shields.io/npm/v/react-transition-group.svg
 [npm]: https://www.npmjs.org/package/react-transition-group
