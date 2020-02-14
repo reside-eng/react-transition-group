@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/reactjs/react-transition-group.git"
+    "url": "https://github.com/reside-eng/react-transition-group.git"
   },
   "keywords": [
     "react",
@@ -32,9 +32,9 @@
   "author": "",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/reactjs/react-transition-group/issues"
+    "url": "https://github.com/reside-eng/react-transition-group/issues"
   },
-  "homepage": "https://github.com/reactjs/react-transition-group#readme",
+  "homepage": "https://github.com/reside-eng/react-transition-group#readme",
   "jest": {
     "testRegex": "-test\\.js",
     "setupFiles": [
