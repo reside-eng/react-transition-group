@@ -68,9 +68,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Git Status
-        run: |
-          git status
       - name: Archive Workspace on Failure
         if: failure()
         run: zip -r workspace-files ./
