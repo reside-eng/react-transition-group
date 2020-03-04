@@ -16,12 +16,9 @@ class CSSTransitionGroupFixture extends React.Component {
   }
   handleAddItem = () => {
     this.setState(({ items }) => ({
-      items: [
-        ...items,
-        `Item number: ${++this.count}`,
-      ],
+      items: [...items, `Item number: ${++this.count}`],
     }));
-  }
+  };
 
   handleRemoveItems = () => {
     this.setState(({ items }) => {
@@ -29,13 +26,13 @@ class CSSTransitionGroupFixture extends React.Component {
       items.splice(1, 3);
       return { items };
     });
-  }
+  };
 
-  handleRemoveItem = (item) => {
+  handleRemoveItem = item => {
     this.setState(({ items }) => ({
       items: items.filter(i => i !== item),
     }));
-  }
+  };
 
   render() {
     const { items: _, description, children, ...props } = this.props;
@@ -43,26 +40,23 @@ class CSSTransitionGroupFixture extends React.Component {
     return (
       <StoryFixture description={description}>
         <div style={{ marginBottom: 10 }}>
-          <button onClick={this.handleAddItem}>
-            Add Item
-          </button>
-          {' '}
-          <button onClick={this.handleRemoveItems}>
-            Remove a few
-          </button>
+          <button onClick={this.handleAddItem}>Add Item</button>{' '}
+          <button onClick={this.handleRemoveItems}>Remove a few</button>
         </div>
         <TransitionGroup component="div" {...props}>
-          {this.state.items.map(item => React.cloneElement(children, {
-            key: item,
-            children: (
-              <div>
-                {item}
-                <button onClick={() => this.handleRemoveItem(item)}>
-                  &times;
-                </button>
-              </div>
-            )
-          }))}
+          {this.state.items.map(item =>
+            React.cloneElement(children, {
+              key: item,
+              children: (
+                <div>
+                  {item}
+                  <button onClick={() => this.handleRemoveItem(item)}>
+                    &times;
+                  </button>
+                </div>
+              ),
+            })
+          )}
         </TransitionGroup>
       </StoryFixture>
     );

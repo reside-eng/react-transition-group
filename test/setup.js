@@ -1,4 +1,3 @@
-
 global.requestAnimationFrame = function(callback) {
   setTimeout(callback, 0);
 };
@@ -6,4 +5,4 @@ global.requestAnimationFrame = function(callback) {
 const Enzyme = require('enzyme');
 const Adapter = require('enzyme-adapter-react-16');
 
-Enzyme.configure({ adapter: new Adapter() })
+Enzyme.configure({ adapter: new Adapter() });

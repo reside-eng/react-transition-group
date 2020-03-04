@@ -35,7 +35,8 @@ class Index extends React.Component {
               like{' '}
               <a href="https://github.com/chenglou/react-motion">
                 React-Motion
-              </a>, it does not animate styles by itself. Instead it exposes
+              </a>
+              , it does not animate styles by itself. Instead it exposes
               transition stages, manages classes and group elements and
               manipulates the DOM in useful ways, making the implementation of
               actual visual transitions much easier.

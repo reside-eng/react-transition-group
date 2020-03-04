@@ -4,7 +4,7 @@ import StoryFixture from './StoryFixture';
 import Fade from './transitions/Fade';
 import Scale from './transitions/Scale';
 
-const FadeAndScale = (props) => (
+const FadeAndScale = props => (
   <Fade {...props}>
     <div>
       <div>I will fade</div>
@@ -21,8 +21,7 @@ const FadeAndScale = (props) => (
       </Scale>
     </div>
   </Fade>
-)
-
+);
 
 export default class Example extends React.Component {
   constructor(props, context) {
@@ -31,8 +30,8 @@ export default class Example extends React.Component {
   }
 
   toggleNested = () => {
-    this.setState({ showNested: !this.state.showNested })
-  }
+    this.setState({ showNested: !this.state.showNested });
+  };
 
   render() {
     return (
@@ -46,6 +45,3 @@ export default class Example extends React.Component {
     );
   }
 }
-
-
-

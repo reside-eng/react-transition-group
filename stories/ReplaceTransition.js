@@ -11,12 +11,13 @@ let styles = css`
     opacity: 0.01;
   }
 
-  .enter.enter-active  {
+  .enter.enter-active {
     position: absolute;
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
     opacity: 1;
     transition: opacity ${FADE_TIMEOUT * 2}ms ease-in;
-    transition-delay: ${FADE_TIMEOUT}ms
+    transition-delay: ${FADE_TIMEOUT}ms;
   }
 
   .exit {
@@ -46,21 +47,17 @@ export default class Fade extends React.Component {
   render() {
     const { ...props } = this.props;
     return (
-      <CSSTransition
-        {...props}
-        className={styles.box}
-        classNames={styles}
-      />
+      <CSSTransition {...props} className={styles.box} classNames={styles} />
     );
   }
 }
 
 class Example extends React.Component {
-  state = { in: false }
+  state = { in: false };
   render() {
     return (
       <div>
-        <button onClick={() => this.setState(p => ({ in: !p.in })) }>
+        <button onClick={() => this.setState(p => ({ in: !p.in }))}>
           toggle (in: "{String(this.state.in)}")
         </button>
         {React.cloneElement(this.props.children, this.state)}
@@ -69,22 +66,23 @@ class Example extends React.Component {
   }
 }
 
-
-storiesOf('Replace Transition', module)
-  .add('Animates on all', () => (
-
-    <Example>
-      <ReplaceTransition
-        className={styles.container}
-        onEnter={() => console.log('onEnter')}
-        onEntering={() => console.log('onEntering')}
-        onEntered={() => console.log('onEntered')}
-        onExit={() => console.log('onExit')}
-        onExiting={() => console.log('onExiting')}
-        onExited={() => console.log('onExited')}
-      >
-        <Fade><div>in True</div></Fade>
-        <Fade><div>in False</div></Fade>
-      </ReplaceTransition>
-    </Example>
-  ))
+storiesOf('Replace Transition', module).add('Animates on all', () => (
+  <Example>
+    <ReplaceTransition
+      className={styles.container}
+      onEnter={() => console.log('onEnter')}
+      onEntering={() => console.log('onEntering')}
+      onEntered={() => console.log('onEntered')}
+      onExit={() => console.log('onExit')}
+      onExiting={() => console.log('onExiting')}
+      onExited={() => console.log('onExited')}
+    >
+      <Fade>
+        <div>in True</div>
+      </Fade>
+      <Fade>
+        <div>in False</div>
+      </Fade>
+    </ReplaceTransition>
+  </Example>
+));

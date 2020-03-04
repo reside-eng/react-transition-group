@@ -1,15 +1,14 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { polyfill } from 'react-lifecycles-compat'
-
+import PropTypes from 'prop-types';
+import React from 'react';
+import { polyfill } from 'react-lifecycles-compat';
 
 import {
   getChildMapping,
   getInitialChildMapping,
   getNextChildMapping,
-} from './utils/ChildMapping'
+} from './utils/ChildMapping';
 
-const values = Object.values || (obj => Object.keys(obj).map(k => obj[k]))
+const values = Object.values || (obj => Object.keys(obj).map(k => obj[k]));
 
 const propTypes = {
   /**
@@ -58,12 +57,12 @@ const propTypes = {
    * @type Function(child: ReactElement) -> ReactElement
    */
   childFactory: PropTypes.func,
-}
+};
 
 const defaultProps = {
   component: 'div',
   childFactory: child => child,
-}
+};
 
 /**
  * The `<TransitionGroup>` component manages a set of transition components
@@ -82,28 +81,28 @@ const defaultProps = {
 class TransitionGroup extends React.Component {
   static childContextTypes = {
     transitionGroup: PropTypes.object.isRequired,
-  }
+  };
 
   constructor(props, context) {
-    super(props, context)
+    super(props, context);
 
-    const handleExited = this.handleExited.bind(this)
+    const handleExited = this.handleExited.bind(this);
 
     // Initial children should all be entering, dependent on appear
     this.state = {
       handleExited,
       firstRender: true,
-    }
+    };
   }
 
   getChildContext() {
     return {
       transitionGroup: { isMounting: !this.appeared },
-    }
+    };
   }
 
   componentDidMount() {
-    this.appeared = true
+    this.appeared = true;
   }
 
   static getDerivedStateFromProps(
@@ -115,42 +114,42 @@ class TransitionGroup extends React.Component {
         ? getInitialChildMapping(nextProps, handleExited)
         : getNextChildMapping(nextProps, prevChildMapping, handleExited),
       firstRender: false,
-    }
+    };
   }
 
   handleExited(child, node) {
-    let currentChildMapping = getChildMapping(this.props.children)
+    let currentChildMapping = getChildMapping(this.props.children);
 
-    if (child.key in currentChildMapping) return
+    if (child.key in currentChildMapping) return;
 
     if (child.props.onExited) {
-      child.props.onExited(node)
+      child.props.onExited(node);
     }
 
     this.setState(state => {
-      let children = { ...state.children }
+      let children = { ...state.children };
 
-      delete children[child.key]
-      return { children }
-    })
+      delete children[child.key];
+      return { children };
+    });
   }
 
   render() {
-    const { component: Component, childFactory, ...props } = this.props
-    const children = values(this.state.children).map(childFactory)
+    const { component: Component, childFactory, ...props } = this.props;
+    const children = values(this.state.children).map(childFactory);
 
-    delete props.appear
-    delete props.enter
-    delete props.exit
+    delete props.appear;
+    delete props.enter;
+    delete props.exit;
 
     if (Component === null) {
-      return children
+      return children;
     }
-    return <Component {...props}>{children}</Component>
+    return <Component {...props}>{children}</Component>;
   }
 }
 
-TransitionGroup.propTypes = propTypes
-TransitionGroup.defaultProps = defaultProps
+TransitionGroup.propTypes = propTypes;
+TransitionGroup.defaultProps = defaultProps;
 
-export default polyfill(TransitionGroup)
+export default polyfill(TransitionGroup);

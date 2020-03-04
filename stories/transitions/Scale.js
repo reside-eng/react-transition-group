@@ -31,11 +31,6 @@ export default class Scale extends React.Component {
     timeout: SCALE_TIMEOUT,
   };
   render() {
-    return (
-      <CSSTransition
-        {...this.props}
-        classNames={styles}
-      />
-    );
+    return <CSSTransition {...this.props} classNames={styles} />;
   }
 }

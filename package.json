@@ -13,6 +13,9 @@
     "build": "babel src --out-dir lib --delete-dir-on-start && yarn build:dist && cp README.md LICENSE ./lib",
     "build:dist": "webpack --mode production",
     "lint": "eslint src test",
+    "lint:fix": "yarn lint --fix",
+    "format": "prettier \"**/*.js\" --write",
+    "format:check": "prettier \"**/*.js\" --check",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -46,8 +49,18 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.{js}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "peerDependencies": {
     "react": ">=15.0.0",
@@ -83,7 +96,8 @@
     "eslint-plugin-react": "^7.11.1",
     "husky": "^4.2.3",
     "jest": "^23.6.0",
-    "prettier": "^1.14.3",
+    "lint-staged": "10.0.8",
+    "prettier": "^1.19.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-test-renderer": "^16.5.2",

@@ -11,7 +11,7 @@ let styles = css`
   }
 
   .enter.enter-active,
-  .appear.appear-active  {
+  .appear.appear-active {
     opacity: 1;
     transition: opacity 1000ms ease-in;
   }
@@ -31,11 +31,6 @@ export default class Fade extends React.Component {
     timeout: FADE_TIMEOUT,
   };
   render() {
-    return (
-      <CSSTransition
-        {...this.props}
-        classNames={styles}
-      />
-    );
+    return <CSSTransition {...this.props} classNames={styles} />;
   }
 }

@@ -7,8 +7,10 @@ import React from 'react';
 import Transition from './Transition';
 import { classNamesShape } from './utils/PropTypes';
 
-const addClass = (node, classes) => node && classes && classes.split(' ').forEach(c => addOneClass(node, c));
-const removeClass = (node, classes) => node && classes && classes.split(' ').forEach(c => removeOneClass(node, c));
+const addClass = (node, classes) =>
+  node && classes && classes.split(' ').forEach(c => addOneClass(node, c));
+const removeClass = (node, classes) =>
+  node && classes && classes.split(' ').forEach(c => removeOneClass(node, c));
 
 const propTypes = {
   ...Transition.propTypes,
@@ -84,7 +86,6 @@ const propTypes = {
    */
   onEntered: PropTypes.func,
 
-
   /**
    * A `<Transition>` callback fired immediately after the 'exit' class is
    * applied.
@@ -124,27 +125,27 @@ const propTypes = {
  */
 class CSSTransition extends React.Component {
   onEnter = (node, appearing) => {
-    const { className } = this.getClassNames(appearing ? 'appear' : 'enter')
+    const { className } = this.getClassNames(appearing ? 'appear' : 'enter');
 
     this.removeClasses(node, 'exit');
-    addClass(node, className)
+    addClass(node, className);
 
     if (this.props.onEnter) {
-      this.props.onEnter(node)
+      this.props.onEnter(node);
     }
-  }
+  };
 
   onEntering = (node, appearing) => {
     const { activeClassName } = this.getClassNames(
       appearing ? 'appear' : 'enter'
     );
 
-    this.reflowAndAddClass(node, activeClassName)
+    this.reflowAndAddClass(node, activeClassName);
 
     if (this.props.onEntering) {
-      this.props.onEntering(node)
+      this.props.onEntering(node);
     }
-  }
+  };
 
   onEntered = (node, appearing) => {
     const { doneClassName } = this.getClassNames('enter');
@@ -153,64 +154,72 @@ class CSSTransition extends React.Component {
     addClass(node, doneClassName);
 
     if (this.props.onEntered) {
-      this.props.onEntered(node)
+      this.props.onEntered(node);
     }
-  }
+  };
 
-  onExit = (node) => {
-    const { className } = this.getClassNames('exit')
+  onExit = node => {
+    const { className } = this.getClassNames('exit');
 
     this.removeClasses(node, 'appear');
     this.removeClasses(node, 'enter');
-    addClass(node, className)
+    addClass(node, className);
 
     if (this.props.onExit) {
-      this.props.onExit(node)
+      this.props.onExit(node);
     }
-  }
+  };
 
-  onExiting = (node) => {
-    const { activeClassName } = this.getClassNames('exit')
+  onExiting = node => {
+    const { activeClassName } = this.getClassNames('exit');
 
-    this.reflowAndAddClass(node, activeClassName)
+    this.reflowAndAddClass(node, activeClassName);
 
     if (this.props.onExiting) {
-      this.props.onExiting(node)
+      this.props.onExiting(node);
     }
-  }
+  };
 
-  onExited = (node) => {
+  onExited = node => {
     const { doneClassName } = this.getClassNames('exit');
 
     this.removeClasses(node, 'exit');
     addClass(node, doneClassName);
 
     if (this.props.onExited) {
-      this.props.onExited(node)
+      this.props.onExited(node);
     }
-  }
+  };
 
-  getClassNames = (type) => {
+  getClassNames = type => {
     const { classNames } = this.props;
 
-    let className = typeof classNames !== 'string' ?
-      classNames[type] : classNames + '-' + type;
+    let className =
+      typeof classNames !== 'string'
+        ? classNames[type]
+        : classNames + '-' + type;
 
-    let activeClassName = typeof classNames !== 'string' ?
-      classNames[type + 'Active'] : className + '-active';
+    let activeClassName =
+      typeof classNames !== 'string'
+        ? classNames[type + 'Active']
+        : className + '-active';
 
-    let doneClassName = typeof classNames !== 'string' ?
-      classNames[type + 'Done'] : className + '-done';
+    let doneClassName =
+      typeof classNames !== 'string'
+        ? classNames[type + 'Done']
+        : className + '-done';
 
     return {
       className,
       activeClassName,
-      doneClassName
+      doneClassName,
     };
-  }
+  };
 
   removeClasses(node, type) {
-    const { className, activeClassName, doneClassName } = this.getClassNames(type)
+    const { className, activeClassName, doneClassName } = this.getClassNames(
+      type
+    );
     className && removeClass(node, className);
     activeClassName && removeClass(node, activeClassName);
     doneClassName && removeClass(node, doneClassName);
@@ -248,4 +257,4 @@ class CSSTransition extends React.Component {
 
 CSSTransition.propTypes = propTypes;
 
-export default CSSTransition
+export default CSSTransition;
