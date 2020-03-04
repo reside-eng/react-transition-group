@@ -15,7 +15,7 @@ describe('CSSTransitionGroup', () => {
       <CSSTransition classNames="yolo" timeout={0} {...props}>
         <span id={id} />
       </CSSTransition>
-    )
+    );
   }
 
   beforeEach(() => {
@@ -31,22 +31,21 @@ describe('CSSTransitionGroup', () => {
     spyOn(console, 'error');
   });
 
-
   it('should clean-up silently after the timeout elapses', () => {
     let a = ReactDOM.render(
       <TransitionGroup enter={false}>
-        <YoloTransition key="one" id="one"/>
+        <YoloTransition key="one" id="one" />
       </TransitionGroup>,
-      container,
+      container
     );
 
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(1);
 
     ReactDOM.render(
       <TransitionGroup enter={false}>
-        <YoloTransition key="two" id="two"/>
+        <YoloTransition key="two" id="two" />
       </TransitionGroup>,
-      container,
+      container
     );
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(2);
     expect(ReactDOM.findDOMNode(a).childNodes[0].id).toBe('two');
@@ -67,14 +66,14 @@ describe('CSSTransitionGroup', () => {
       <TransitionGroup>
         <YoloTransition key="one" id="one" />
       </TransitionGroup>,
-      container,
+      container
     );
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(1);
     ReactDOM.render(
       <TransitionGroup>
         <YoloTransition key="two" id="two" />
       </TransitionGroup>,
-      container,
+      container
     );
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(2);
     expect(ReactDOM.findDOMNode(a).childNodes[0].id).toBe('two');
@@ -86,14 +85,14 @@ describe('CSSTransitionGroup', () => {
       <TransitionGroup enter={false} leave={false}>
         <YoloTransition key="one" id="one" />
       </TransitionGroup>,
-      container,
+      container
     );
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(1);
     ReactDOM.render(
       <TransitionGroup enter={false} leave={false}>
         <YoloTransition key="two" id="two" />
       </TransitionGroup>,
-      container,
+      container
     );
 
     jest.runAllTimers();
@@ -102,43 +101,31 @@ describe('CSSTransitionGroup', () => {
       <TransitionGroup enter={false} leave>
         <YoloTransition key="three" id="three" />
       </TransitionGroup>,
-      container,
+      container
     );
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(2);
     expect(ReactDOM.findDOMNode(a).childNodes[0].id).toBe('three');
     expect(ReactDOM.findDOMNode(a).childNodes[1].id).toBe('two');
   });
 
-
   it('should work with a null child', () => {
-    ReactDOM.render(
-      <TransitionGroup>
-        {[null]}
-      </TransitionGroup>,
-      container,
-    );
+    ReactDOM.render(<TransitionGroup>{[null]}</TransitionGroup>, container);
   });
 
   it('should work with a child which renders as null', () => {
     const NullComponent = () => null;
     // Testing the whole lifecycle of entering and exiting,
     // because those lifecycle methods used to fail when the DOM node was null.
-    ReactDOM.render(
-      <TransitionGroup/>,
-      container,
-    );
+    ReactDOM.render(<TransitionGroup />, container);
     ReactDOM.render(
       <TransitionGroup>
         <CSSTransition classNames="yolo" timeout={0}>
-          <NullComponent/>
+          <NullComponent />
         </CSSTransition>
       </TransitionGroup>,
-      container,
+      container
     );
-    ReactDOM.render(
-      <TransitionGroup/>,
-      container,
-    );
+    ReactDOM.render(<TransitionGroup />, container);
   });
 
   it('should transition from one to null', () => {
@@ -146,15 +133,10 @@ describe('CSSTransitionGroup', () => {
       <TransitionGroup>
         <YoloTransition key="one" id="one" />
       </TransitionGroup>,
-      container,
+      container
     );
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(1);
-    ReactDOM.render(
-      <TransitionGroup>
-        {null}
-      </TransitionGroup>,
-      container,
-    );
+    ReactDOM.render(<TransitionGroup>{null}</TransitionGroup>, container);
     // (Here, we expect the original child to stick around but test that no
     // exception is thrown)
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(1);
@@ -163,17 +145,15 @@ describe('CSSTransitionGroup', () => {
 
   it('should transition from false to one', () => {
     let a = ReactDOM.render(
-      <TransitionGroup>
-        {false}
-      </TransitionGroup>,
-      container,
+      <TransitionGroup>{false}</TransitionGroup>,
+      container
     );
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(0);
     ReactDOM.render(
       <TransitionGroup>
         <YoloTransition key="one" id="one" />
       </TransitionGroup>,
-      container,
+      container
     );
     expect(ReactDOM.findDOMNode(a).childNodes.length).toBe(1);
     expect(ReactDOM.findDOMNode(a).childNodes[0].id).toBe('one');
@@ -182,11 +162,7 @@ describe('CSSTransitionGroup', () => {
   it('should clear transition timeouts when unmounted', () => {
     class Component extends React.Component {
       render() {
-        return (
-          <TransitionGroup>
-            {this.props.children}
-          </TransitionGroup>
-        );
+        return <TransitionGroup>{this.props.children}</TransitionGroup>;
       }
     }
 
@@ -240,10 +216,9 @@ describe('CSSTransitionGroup', () => {
       render() {
         return (
           <div>
-            {
-              React.Children.map(this.props.children,
-                child => React.cloneElement(child, { className: extraClassNameProp }))
-            }
+            {React.Children.map(this.props.children, child =>
+              React.cloneElement(child, { className: extraClassNameProp })
+            )}
           </div>
         );
       }
@@ -258,9 +233,7 @@ describe('CSSTransitionGroup', () => {
     class Component extends React.Component {
       render() {
         return (
-          <TransitionGroup
-            component={Wrapper}
-          >
+          <TransitionGroup component={Wrapper}>
             <Child />
           </TransitionGroup>
         );
